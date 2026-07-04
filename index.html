@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <!-- Google Fonts: Outfit for titles/headings/clock, Inter for text/links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Premium background animation layer -->
+    <div class="bg-gradient-overlay"></div>
+    <div class="bg-mesh">
+        <div class="mesh-sphere sphere-1"></div>
+        <div class="mesh-sphere sphere-2"></div>
+        <div class="mesh-sphere sphere-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header Area: Clock, Date, Weather & Greeting -->
+        <header class="start-header">
+            <div class="clock-widget">
+                <div id="clock" class="time-display">00:00:00</div>
+                <div id="date" class="date-display">Lade Datum...</div>
+            </div>
+            
+            <!-- Search Widget inside Header -->
+            <section class="search-section">
+                <form id="search-form" class="search-bar" action="https://www.google.com/search" method="get">
+                    <div class="search-input-wrapper">
+                        <div class="engine-selector">
+                            <button type="button" id="engine-btn" class="engine-selector-btn" title="Suchmaschine wechseln">
+                                <i data-lucide="search" class="engine-icon"></i>
+                                <span id="engine-label" class="engine-label">Google</span>
+                            </button>
+                            <ul id="engine-dropdown" class="engine-dropdown">
+                                <li class="engine-item active" data-engine="google" data-action="https://www.google.com/search" data-param="q">
+                                    <i data-lucide="search"></i><span>Google</span>
+                                </li>
+                                <li class="engine-item" data-engine="youtube" data-action="https://www.youtube.com/results" data-param="search_query">
+                                    <i data-lucide="youtube"></i><span>YouTube</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="text" id="search-input" name="q" placeholder="Im Web suchen..." autocomplete="off" autofocus>
+                        <button type="submit" class="search-submit" title="Suchen">
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+            
+            <div class="welcome-container">
+                <button id="settings-btn" class="settings-icon-btn" title="Einstellungen">
+                    <i data-lucide="settings"></i>
+                </button>
+                <h1 class="greeting-display">
+                    <span id="greeting-text">Hallo</span>, <span id="user-name">Ingo</span>
+                </h1>
+                <p class="greeting-subtitle">Einen produktiven Tag wünsche ich dir.</p>
+            </div>
+        </header>
+
+        <!-- Bookmarks Section with Tab Navigation -->
+        <section class="bookmarks-section">
+            <div class="bookmarks-tabs">
+                <button type="button" class="bookmark-tab-btn active" data-category="video">
+                    <i data-lucide="video"></i> Video
+                </button>
+                <button type="button" class="bookmark-tab-btn" data-category="oerr">
+                    <i data-lucide="play-circle"></i> ÖRR
+                </button>
+                <button type="button" class="bookmark-tab-btn" data-category="video2">
+                    <i data-lucide="tv"></i> Video 2
+                </button>
+                <button type="button" class="bookmark-tab-btn" data-category="audio">
+                    <i data-lucide="music"></i> Audio
+                </button>
+                <button type="button" class="bookmark-tab-btn" data-category="ai">
+                    <i data-lucide="sparkles"></i> AI
+                </button>
+                <button type="button" class="bookmark-tab-btn" data-category="dev">
+                    <i data-lucide="code"></i> Entwicklung
+                </button>
+            </div>
+            
+            <div class="bookmarks-content-card">
+                <div class="bookmarks-grid" id="active-bookmarks-grid">
+                    <!-- Bookmarks will be injected here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Unified Settings / Configuration Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-container modal-large">
+            <div class="modal-header">
+                <h2>Einstellungen</h2>
+                <button type="button" class="modal-close" id="settings-close-btn">&times;</button>
+            </div>
+            
+            <div class="settings-tabs">
+                <button type="button" class="tab-btn active" data-tab="tab-profile">Profil</button>
+                <button type="button" class="tab-btn" data-tab="tab-bookmarks">Lesezeichen</button>
+            </div>
+
+            <!-- Tab: Profile -->
+            <div id="tab-profile" class="tab-content active">
+                <form id="settings-form">
+                    <div class="form-group">
+                        <label for="settings-name">Dein Name</label>
+                        <input type="text" id="settings-name" required placeholder="Ingo">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn-primary">Name speichern</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tab: Bookmarks -->
+            <div id="tab-bookmarks" class="tab-content">
+                <!-- Add Bookmark Form -->
+                <form id="modal-bookmark-form">
+                    <h3 class="section-title">Lesezeichen hinzufügen</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="bookmark-title">Name</label>
+                            <input type="text" id="bookmark-title" required placeholder="z.B. GitHub">
+                        </div>
+                        <div class="form-group">
+                            <label for="bookmark-url">URL</label>
+                            <input type="url" id="bookmark-url" required placeholder="https://github.com">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="bookmark-category">Kategorie</label>
+                            <select id="bookmark-category">
+                                <option value="video">Video</option>
+                                <option value="oerr">ÖRR</option>
+                                <option value="video2">Video 2</option>
+                                <option value="audio">Audio</option>
+                                <option value="ai">AI</option>
+                                <option value="dev">Entwicklung</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookmark-icon">Icon (Lucide Name oder Emoji)</label>
+                            <input type="text" id="bookmark-icon" placeholder="z.B. github, code oder 💻">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full-width">Hinzufügen</button>
+                </form>
+
+                <!-- Manage Bookmarks List -->
+                <div class="settings-bookmarks-section">
+                    <h3 class="section-title">Lesezeichen verwalten</h3>
+                    <div id="settings-bookmarks-list" class="settings-bookmarks-list">
+                        <!-- Bookmarks list will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lucide Icons for vector-perfect, modern iconography -->
+    <script src="lucide.min.js"></script>
+    <script src="storage.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
